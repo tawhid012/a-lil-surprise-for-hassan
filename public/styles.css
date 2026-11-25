@@ -607,6 +607,158 @@ body {
   color: var(--navy);
 }
 
+/* Four Memory Keepsakes Grid & Reveal */
+.memory-keepsakes-section {
+  width: 100%;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1.5px dashed rgba(26, 43, 76, 0.18);
+}
+
+.memory-section-title {
+  font-size: clamp(1.85rem, 5vw, 2.5rem);
+}
+
+.memory-section-sub {
+  margin-top: 4px;
+  font-size: 1.05rem;
+}
+
+.memory-keepsakes-grid {
+  width: 100%;
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.memory-slip-card {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  position: relative;
+  border: 1.6px solid rgba(26, 43, 76, 0.28);
+  background: var(--bg-ivory);
+  color: var(--navy);
+  border-radius: 10px;
+  padding: 20px 16px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  box-shadow: 3px 4px 0 rgba(26, 43, 76, 0.16), 0 8px 18px rgba(26, 43, 76, 0.08);
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.memory-slip-card:hover {
+  transform: translate(-1px, -4px);
+  border-color: var(--navy);
+  box-shadow: 4px 6px 0 rgba(26, 43, 76, 0.22), var(--shadow-paper);
+}
+
+.memory-slip-card:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 2px 0 rgba(26, 43, 76, 0.16);
+}
+
+.memory-slip-card:focus-visible,
+.memory-close-x:focus-visible {
+  outline: 2.5px solid var(--honey);
+  outline-offset: 3px;
+}
+
+.memory-slip-card.is-visited::after {
+  content: 'Read ✓';
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--wax-red);
+  background: var(--bg-paper);
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.memory-slip-title {
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+}
+
+.memory-slip-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-muted);
+}
+
+.memory-slip-cta {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--bg-paper);
+  border: 1px solid rgba(26, 43, 76, 0.28);
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+}
+
+.memory-slip-card.is-visited .memory-slip-cta {
+  background: var(--navy);
+  color: var(--bg-ivory);
+  border-color: var(--navy);
+}
+
+.memory-note-sheet {
+  max-width: 540px;
+  animation: letter-unfold 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.memory-close-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 43, 76, 0.22);
+  background: var(--bg-paper);
+  color: var(--navy);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.memory-note-title {
+  font-size: clamp(2rem, 5.5vw, 2.65rem);
+  margin-bottom: 14px;
+}
+
+.memory-note-body {
+  margin: 0 auto;
+  max-width: 40ch;
+  font-family: var(--font-serif);
+  font-size: 1.24rem;
+  line-height: 1.7;
+  color: var(--navy-soft);
+}
+
+.memory-note-hearts {
+  margin-top: 16px;
+  color: var(--wax-red);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+}
+
 /* Sub-view A: Envelope & Letter */
 .envelope-wrapper { margin: 14px 0 20px; perspective: 1000px; }
 
