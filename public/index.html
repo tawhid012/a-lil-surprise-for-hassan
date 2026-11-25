@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FAF5E9" />
+  <title>Happy Birthday, Hassan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Tactile paper grain -->
+  <svg class="grain-svg" aria-hidden="true">
+    <filter id="paper-noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#paper-noise)" opacity="0.045" />
+  </svg>
+
+  <!-- Vintage navy-gingham corner patches -->
+  <div class="corner-decor corner-tl" id="corner-tl" aria-hidden="true"></div>
+  <div class="corner-decor corner-tr" id="corner-tr" aria-hidden="true"></div>
+
+  <!-- Custom Scrapbook Soundtrack Player (full song, auto-starts on unlock, loops continuously) -->
+  <aside class="music-dock" id="music-dock" aria-label="Birthday soundtrack player" hidden>
+    <div class="music-dock-header">
+      <div class="music-dock-label">
+        <span class="music-note-glyph" aria-hidden="true">♪</span>
+        <span class="music-hand-note">I Think They Call This Love</span>
+      </div>
+      <span class="music-artist-tag">Elliot James Reay</span>
+    </div>
+    <div class="bgm-player-bar" id="bgm-player-bar">
+      <button type="button" class="bgm-toggle-btn" id="bgm-toggle-btn" aria-pressed="false" aria-label="Play or pause background song">
+        Play
+      </button>
+      <div class="bgm-eq" id="bgm-eq" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="bgm-status-text" id="bgm-status-text">Ready</span>
+      <audio id="bgm-audio" loop preload="auto"></audio>
+    </div>
+  </aside>
+
+  <main class="scrapbook-stage" id="scrapbook-stage">
+    <!-- SCENE 0: 6-DIGIT PIN GATE -->
+    <section class="scene scene-gate is-active" id="scene-gate" aria-labelledby="gate-heading">
+      <div class="paper-sheet gate-sheet">
+        <div class="washi-tape washi-top-left" aria-hidden="true"></div>
+        <div class="washi-tape washi-top-right" aria-hidden="true"></div>
+        <div class="postage-stamp" aria-hidden="true">
+          <span>PRIVATE</span>
+          <strong>FOR HASSAN</strong>
+        </div>
+
+        <div class="gate-illustration" id="gate-illustration" aria-hidden="true"></div>
+        <p class="eyebrow">Sealed Keepsake</p>
+        <h1 class="handwritten-title gate-title" id="gate-heading">For Hassan</h1>
+        <p class="gate-subtitle">Enter your 6-digit PIN to untie this birthday scrapbook.</p>
+
+        <form id="password-form" class="password-form" novalidate>
+          <label class="sr-only" for="password-input">6-digit PIN</label>
+          <div class="pin-input-wrap">
+            <input
+              id="password-input"
+              name="password"
+              type="password"
+              inputmode="numeric"
+              pattern="[0-9]{6}"
+              maxlength="6"
+              autocomplete="one-time-code"
+              placeholder="••••••"
+              required
+            />
+            <button
+              type="button"
+              class="toggle-visibility"
+              id="toggle-password"
+              aria-label="Show PIN"
+              aria-pressed="false"
+            >
+              Show
+            </button>
+          </div>
+          <p class="form-error" id="password-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary" id="password-submit">
+            <span class="btn-label">Unlock Keepsake</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SCENE 1: BIRTHDAY OPENING (Exact Video Composition: Bunting + Happy Birthday + MAKE A WISH + Blow Candle + Blocked NEXT + Cake) -->
+    <section class="scene scene-opening" id="scene-1" aria-labelledby="opening-title" hidden>
+      <div class="bunting-wrap" id="opening-bunting" aria-hidden="true"></div>
+      <div class="scene-inner opening-centerpiece">
+        <span class="edition-stamp" aria-hidden="true">BIRTHDAY EDITION</span>
+        <h1 class="handwritten-title opening-title" id="opening-title"></h1>
+        <p class="eyebrow opening-wish" id="opening-eyebrow">MAKE A WISH!!</p>
+        <p class="supporting-text opening-subtitle" id="opening-subtitle"></p>
+
+        <div class="scene-actions opening-cta-wrap">
+          <button type="button" class="btn btn-primary" id="btn-blow-candle">BLOW THE CANDLE</button>
+          <button type="button" class="btn btn-secondary is-locked" id="btn-opening-next" aria-disabled="true">NEXT →</button>
+        </div>
+        <p class="candle-lock-hint" id="candle-lock-hint" role="status" aria-live="polite" hidden>
+          First blow the candle — otherwise Next is blocked!
+        </p>
+
+        <div class="cake-mat opening-cake-mat">
+          <div class="washi-tape washi-top-left" aria-hidden="true"></div>
+          <span class="cake-annotation" aria-hidden="true">make a wish ♡</span>
+          <div class="cake-stage" id="opening-cake" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 2: PLEASE ACCEPT THE GIFT (Big-Eyed Doodle + YES/NO + Crying NO State) -->
+    <section class="scene scene-accept" id="scene-2" aria-labelledby="accept-title" hidden>
+      <div class="paper-sheet accept-sheet">
+        <div class="washi-tape washi-top-center" aria-hidden="true"></div>
+        <span class="corner-sparkle corner-sparkle-l" aria-hidden="true">✦</span>
+        <span class="corner-sparkle corner-sparkle-r" aria-hidden="true">✧</span>
+        <h2 class="uppercase-title" id="accept-title">PLEASE ACCEPT THE GIFT</h2>
+        <div class="doodle-character-wrap" id="accept-doodle" aria-hidden="true"></div>
+
+        <div class="choice-row" id="accept-choices">
+          <button type="button" class="btn btn-primary btn-pill-sm" id="btn-accept-yes">YES</button>
+          <button type="button" class="btn btn-maroon btn-pill-sm" id="btn-accept-no">NO</button>
+        </div>
+
+        <div class="scene-actions" id="accept-retry-wrap" hidden>
+          <button type="button" class="btn btn-primary" id="btn-accept-retry">TRY AGAIN</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 3: CHOOSE YOUR GIFTS HUB + 3 INTERACTIVE SUB-VIEWS -->
+    <section class="scene scene-hub" id="scene-3" aria-labelledby="hub-title" hidden>
+      <!-- Hub View -->
+      <div class="scene-inner hub-view" id="hub-view">
+        <h2 class="uppercase-title" id="hub-title">Choose Your Gifts</h2>
+        <p class="supporting-text hub-sub">Tap each keepsake to open it</p>
+
+        <div class="hub-objects-grid">
+          <button type="button" class="hub-object-card" id="hub-open-envelope" aria-label="Open birthday letter">
+            <span class="hub-object-num" aria-hidden="true">01</span>
+            <div class="hub-object-art" id="art-hub-envelope" aria-hidden="true"></div>
+            <span class="hub-object-caption">The Letter</span>
+          </button>
+
+          <button type="button" class="hub-object-card" id="hub-open-flowers" aria-label="Open flower bouquet">
+            <span class="hub-object-num" aria-hidden="true">02</span>
+            <div class="hub-object-art" id="art-hub-flowers" aria-hidden="true"></div>
+            <span class="hub-object-caption">Tulips &amp; Notes</span>
+          </button>
+
+          <button type="button" class="hub-object-card" id="hub-open-box" aria-label="Open surprise gift box">
+            <span class="hub-object-num" aria-hidden="true">03</span>
+            <div class="hub-object-art" id="art-hub-box" aria-hidden="true"></div>
+            <span class="hub-object-caption">Birthday Box</span>
+          </button>
+        </div>
+
+        <!-- 4 Real Memory Keepsakes from Manisha -->
+        <div class="memory-keepsakes-section">
+          <h3 class="handwritten-title memory-section-title" id="memory-gifts-title"></h3>
+          <p class="supporting-text memory-section-sub" id="memory-gifts-subtitle"></p>
+          <div class="memory-keepsakes-grid" id="memory-keepsakes-grid"></div>
+        </div>
+
+        <div class="scene-actions">
+          <button type="button" class="btn btn-secondary is-locked" id="btn-hub-to-gallery" aria-disabled="true">Open Photo Scrapbook →</button>
+        </div>
+        <p class="candle-lock-hint" id="hub-lock-hint" role="status" aria-live="polite">
+          Open all gifts &amp; memory notes first to unlock the Photo Scrapbook.
+        </p>
+      </div>
+
+      <!-- Sub-view D: Revealed Memory Keepsake Note -->
+      <div class="scene-inner gift-subview" id="subview-memory" hidden>
+        <article class="paper-sheet memory-note-sheet" aria-live="polite">
+          <div class="washi-tape washi-top-center" aria-hidden="true"></div>
+          <button type="button" class="memory-close-x" id="btn-memory-close-x" aria-label="Close memory note">✕</button>
+          <p class="eyebrow" id="memory-note-tag"></p>
+          <h3 class="handwritten-title memory-note-title" id="memory-note-title"></h3>
+          <p class="memory-note-body" id="memory-note-body"></p>
+          <div class="memory-note-hearts" aria-hidden="true">♡ ✦ ♡</div>
+          <div class="scene-actions">
+            <button type="button" class="btn btn-secondary btn-back-hub" id="btn-memory-back">← Back to Gifts</button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Sub-view A: Animated Navy Envelope & Personal Letter -->
+      <div class="scene-inner gift-subview" id="subview-envelope" hidden>
+        <p class="eyebrow" id="envelope-prompt">Tap the wax seal to open your letter</p>
+
+        <div class="envelope-wrapper" id="envelope-wrapper">
+          <button
+            type="button"
+            class="envelope-interactive"
+            id="envelope-trigger"
+            aria-expanded="false"
+            aria-controls="letter-sheet"
+            aria-label="Open birthday envelope from Manisha"
+          >
+            <div class="envelope-back"></div>
+            <div class="envelope-lining" aria-hidden="true"></div>
+            <div class="letter-preview-card" aria-hidden="true">
+              <span class="letter-preview-salutation">Dear Hassan,</span>
+              <span class="letter-preview-line"></span>
+              <span class="letter-preview-line short"></span>
+            </div>
+            <div class="envelope-front">
+              <span class="envelope-address" aria-hidden="true">To: Hassan</span>
+              <span class="envelope-postmark" aria-hidden="true">BIRTHDAY POST</span>
+            </div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal" aria-hidden="true">
+              <svg viewBox="0 0 44 44" width="44" height="44">
+                <circle cx="22" cy="22" r="19" fill="#B24545" stroke="#8C2F2F" stroke-width="1.8" />
+                <path d="M22 29.5 C22 29.5 13 23.5 13 17.6 C13 14.8 15.2 12.8 17.8 12.8 C19.6 12.8 21.1 13.8 22 15.2 C22.9 13.8 24.4 12.8 26.2 12.8 C28.8 12.8 31 14.8 31 17.6 C31 23.5 22 29.5 22 29.5 Z" fill="#FAF6EE" />
+              </svg>
+            </div>
+          </button>
+        </div>
+
+        <article class="letter-sheet" id="letter-sheet" hidden>
+          <div class="letter-paper">
+            <div class="washi-tape washi-top-left" aria-hidden="true"></div>
+            <p class="letter-salutation" id="letter-salutation"></p>
+            <div class="letter-body" id="letter-body"></div>
+            <p class="letter-closing" id="letter-closing"></p>
+            <p class="letter-signature" id="letter-signature"></p>
+          </div>
+        </article>
+
+        <div class="scene-actions">
+          <button type="button" class="btn btn-secondary btn-back-hub">← Back to Gifts</button>
+        </div>
+      </div>
+
+      <!-- Sub-view B: Flowers for my Sweetheart + Sunglasses Doodle + Pill Notes -->
+      <div class="scene-inner gift-subview flowers-spread" id="subview-flowers" hidden>
+        <div class="flowers-grid">
+          <div class="flowers-left">
+            <h3 class="handwritten-title flowers-heading">flowers for my sweetheart!</h3>
+            <span class="flowers-heart" aria-hidden="true">♡</span>
+            <div class="cool-doodle-row">
+              <div class="cool-doodle-art" id="art-cool-doodle" aria-hidden="true"></div>
+              <div class="pill-notes">
+                <span class="pill-badge">my favorite person</span>
+                <span class="pill-badge pill-badge-alt">your #1 fan</span>
+              </div>
+            </div>
+          </div>
+          <div class="flowers-right" id="art-bouquet-large" aria-hidden="true"></div>
+        </div>
+        <div class="scene-actions">
+          <button type="button" class="btn btn-secondary btn-back-hub">← Back to Gifts</button>
+        </div>
+      </div>
+
+      <!-- Sub-view C: Navy Gift Box -> Vinyl Record Card + OPEN Heart Card -->
+      <div class="scene-inner gift-subview box-spread" id="subview-box" hidden>
+        <div class="box-cards-grid">
+          <div class="vinyl-card">
+            <p class="vinyl-hand-title">happy birthday</p>
+            <div class="vinyl-row">
+              <div class="vinyl-art" id="art-vinyl" aria-hidden="true"></div>
+              <div class="vinyl-notes">
+                <p>THIS REMINDED ME OF YOU</p>
+                <p class="vinyl-sub">Playing <em>I Think They Call This Love</em> — Elliot James Reay ♡</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="open-heart-card" id="open-heart-card">
+            <button type="button" class="heart-open-btn" id="btn-reveal-heart-note">
+              <span class="heart-open-shape" aria-hidden="true">
+                <svg viewBox="0 0 120 105" width="118" height="104">
+                  <path d="M60 96 C60 96 10 64 10 34 C10 18 22 8 36 8 C46 8 54 14 60 22 C66 14 74 8 84 8 C98 8 110 18 110 34 C110 64 60 96 60 96 Z" fill="#FAF6EE" />
+                </svg>
+              </span>
+              <span class="heart-open-text">OPEN</span>
+            </button>
+
+            <div class="heart-revealed-note" id="heart-revealed-note" hidden>
+              <p class="heart-revealed-title">SO GRATEFUL FOR YOU</p>
+              <div id="art-arms-open" aria-hidden="true"></div>
+              <p class="heart-revealed-sub" id="heart-revealed-sub"></p>
+            </div>
+          </div>
+        </div>
+        <div class="scene-actions">
+          <button type="button" class="btn btn-secondary btn-back-hub">← Back to Gifts</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 4: CURATED 4-PHOTO SCRAPBOOK GALLERY -->
+    <section class="scene scene-gallery" id="scene-4" aria-labelledby="gallery-title" hidden>
+      <div class="scene-inner gallery-stage">
+        <header class="section-header">
+          <p class="eyebrow">Scrapbook Album</p>
+          <h2 class="handwritten-title section-title" id="gallery-title"></h2>
+          <p class="supporting-text" id="gallery-subtitle"></p>
+        </header>
+
+        <div class="scrapbook-album" id="scrapbook-album" tabindex="0" aria-roledescription="carousel" aria-label="Birthday memory album">
+          <div class="album-backing-sheet" aria-hidden="true"></div>
+          <div class="album-frame-wrap" id="album-frame-wrap"></div>
+
+          <div class="album-controls">
+            <button type="button" class="btn-icon" id="gallery-prev" aria-label="Previous photograph">
+              <span aria-hidden="true">←</span>
+            </button>
+            <div class="gallery-dots" id="gallery-dots" role="tablist" aria-label="Choose a photograph"></div>
+            <button type="button" class="btn-icon" id="gallery-next" aria-label="Next photograph">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+          <p class="gallery-counter" id="gallery-counter" aria-live="polite"></p>
+        </div>
+
+        <div class="scene-actions gallery-nav-actions">
+          <button type="button" class="btn btn-secondary" id="btn-gallery-back">← Back to Gifts</button>
+          <button type="button" class="btn btn-secondary is-locked" id="btn-gallery-continue" aria-disabled="true">Continue →</button>
+        </div>
+        <p class="candle-lock-hint" id="gallery-lock-hint" role="status" aria-live="polite">
+          View all 4 photos first (1 of 4 viewed) to continue.
+        </p>
+      </div>
+    </section>
+
+    <!-- SCENE STORY: A PAGE FROM MY HEART -->
+    <section class="scene scene-story" id="scene-story" aria-labelledby="story-title" hidden>
+      <article class="paper-sheet story-sheet">
+        <div class="washi-tape washi-top-left" aria-hidden="true"></div>
+        <div class="washi-tape washi-top-right" aria-hidden="true"></div>
+        <div class="story-flower" id="story-flower" aria-hidden="true"></div>
+        <p class="eyebrow story-label" id="story-label"></p>
+        <h2 class="handwritten-title story-title" id="story-title"></h2>
+        <div class="story-body" id="story-body"></div>
+        <p class="story-signature" id="story-signature"></p>
+        <div class="scene-actions story-actions">
+          <button type="button" class="btn btn-secondary" id="btn-story-back">← Back to Photos</button>
+          <button type="button" class="btn btn-primary" id="btn-story-continue"></button>
+        </div>
+      </article>
+    </section>
+
+    <!-- SCENE VOICE: MANISHA'S VOICE NOTE -->
+    <section class="scene scene-voice" id="scene-voice" aria-labelledby="voice-title" hidden>
+      <div class="scene-inner voice-stage">
+        <header class="section-header">
+          <p class="eyebrow" id="voice-card-label"></p>
+          <h2 class="handwritten-title section-title" id="voice-title"></h2>
+          <p class="supporting-text" id="voice-subtitle"></p>
+        </header>
+
+        <div class="paper-sheet voice-postcard">
+          <div class="washi-tape washi-top-left" aria-hidden="true"></div>
+          <div class="washi-tape washi-top-right" aria-hidden="true"></div>
+          <div class="postage-stamp voice-stamp" aria-hidden="true">
+            <span>VOICE POST</span>
+            <strong>FOR HASSAN</strong>
+          </div>
+
+          <div class="voice-player-row">
+            <button
+              type="button"
+              class="voice-play-btn"
+              id="voice-play-btn"
+              aria-label="Play voice note from Manisha"
+              aria-pressed="false"
+            >
+              <span class="voice-icon-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                  <path d="M8 5.14v14l11-7-11-7z" />
+                </svg>
+              </span>
+              <span class="voice-icon-pause" aria-hidden="true" hidden>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                  <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
+                </svg>
+              </span>
+            </button>
+
+            <div class="voice-track-col">
+              <div class="voice-waveform" id="voice-waveform" aria-hidden="true"></div>
+              <input
+                type="range"
+                class="voice-scrubber"
+                id="voice-scrubber"
+                min="0"
+                max="100"
+                step="0.1"
+                value="0"
+                aria-label="Seek voice note"
+              />
+              <div class="voice-times">
+                <span id="voice-time-current">0:00</span>
+                <span id="voice-time-total">0:40</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="voice-caption" id="voice-caption"></p>
+
+          <div class="voice-error" id="voice-error" role="alert" hidden>
+            <span id="voice-error-text">Unable to load the voice note right now.</span>
+            <button type="button" class="btn btn-secondary btn-retry-audio" id="voice-retry-btn">Retry</button>
+          </div>
+
+          <audio id="voice-audio" preload="metadata"></audio>
+        </div>
+
+        <div class="scene-actions voice-actions">
+          <button type="button" class="btn btn-secondary" id="btn-voice-back">← Back to Story</button>
+          <button type="button" class="btn btn-primary" id="btn-voice-continue"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 5: FINAL SURPRISE -->
+    <section class="scene scene-final" id="scene-5" aria-labelledby="final-title" hidden>
+      <canvas class="confetti-canvas" id="confetti-canvas" aria-hidden="true"></canvas>
+      <div class="paper-sheet final-sheet">
+        <div class="washi-tape washi-top-left" aria-hidden="true"></div>
+        <div class="washi-tape washi-top-right" aria-hidden="true"></div>
+        <div class="final-illustration" id="final-illustration" aria-hidden="true"></div>
+        <p class="eyebrow" id="final-eyebrow"></p>
+        <h2 class="handwritten-title final-title" id="final-title"></h2>
+        <div class="final-letter-body" id="final-message"></div>
+        <p class="final-emphasis" id="final-emphasis"></p>
+        <p class="final-signature" id="final-signature"></p>
+        <div class="credit-ribbon">
+          <span id="final-credit"></span>
+        </div>
+        <div class="scene-actions">
+          <button type="button" class="btn btn-secondary" id="btn-replay"></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ENLARGED PHOTO LIGHTBOX -->
+  <div class="lightbox" id="photo-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" hidden>
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close enlarged photograph">✕</button>
+      <div class="lightbox-photo-wrap">
+        <img id="lightbox-img" src="" alt="" />
+      </div>
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+      <div class="lightbox-nav">
+        <button type="button" class="btn-icon" id="lightbox-prev" aria-label="Previous photograph">←</button>
+        <button type="button" class="btn-icon" id="lightbox-next" aria-label="Next photograph">→</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

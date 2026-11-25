@@ -1,0 +1,149 @@
+{
+  "recipient": "Hassan",
+  "senderCredit": "Gifted by Manisha",
+  "opening": {
+    "eyebrow": "A little keepsake made just for you",
+    "title": "Happy Birthday, Hassan",
+    "subtitle": "Make a wish before you turn the page.",
+    "buttonLabel": "NEXT"
+  },
+  "invitation": {
+    "title": "I saved a little something for you",
+    "subtitle": "It is wrapped in paper, ink, and a few quiet wishes.",
+    "primaryChoice": "Open the gift",
+    "secondaryChoice": "Peek inside first",
+    "peekMessage": "It’s warm, personal, and definitely meant for your eyes only. Ready to untie the ribbon?",
+    "continueLabel": "Untie & Continue"
+  },
+  "letter": {
+    "salutation": "Dear my kucchupucchu, ❤️",
+    "paragraphs": [
+      "Happiest Birthday to my kucchupucchu, my cutuu bacha, my favourite buddhu, my love, my world. 😭❤️",
+      "May Allah bless you with endless happiness, good health, peace and success in everything you do. I pray that all your dreams come true, your hard work pays off and you achieve everything you've ever wished for.",
+      "May you shine in cricket, build the career you've always dreamed of and reach heights beyond your imagination. May Allah protect you from every hardship, guide your decisions and grant you success in both Duniya and Akhirah.",
+      "I wish you a peaceful heart, genuine people, financial stability, beautiful memories and a future full of opportunities.",
+      "Never stop believing in yourself, bacha. I genuinely want to see you achieve everything you dream of and become the person you've always wanted to be. I hope I get to witness your victories, celebrate your achievements and cheer for you through every chapter.",
+      "May life always be kind to you and give you a million reasons to smile.",
+      "Stay my adorable, pagal, thoda sa buddhu cutuu.",
+      "I love you endlessly.",
+      "Happy Birthday, my favourite human. ❤️"
+    ],
+    "closing": "Forever yours,",
+    "signature": "Manisha ♡",
+    "continueLabel": "Turn to the Memories"
+  },
+  "gallery": {
+    "title": "A Few Favorite Frames",
+    "subtitle": "Tap any photograph to look closer, or turn through the pages.",
+    "photos": [
+      {
+        "id": "1",
+        "caption": "A quiet table, warm window light, and flowers held out with a smile.",
+        "note": "Soft afternoon glow",
+        "rotation": -1.4
+      },
+      {
+        "id": "2",
+        "caption": "Shoulder to shoulder in cozy layers—and a little panda keeping us company.",
+        "note": "Close & comfortable",
+        "rotation": 1.3
+      },
+      {
+        "id": "3",
+        "caption": "Holding onto your sleeve in the middle of an easy, unhurried moment.",
+        "note": "Easy smiles",
+        "rotation": -1.1
+      },
+      {
+        "id": "4",
+        "caption": "Dressed up in red and soft blue—two different styles that fit right next to each other.",
+        "note": "A dressed-up favorite",
+        "rotation": 1.5
+      }
+    ],
+    "continueLabel": "Open Your Gift Choices"
+  },
+  "gifts": {
+    "title": "Four Little Memory Keepsakes",
+    "subtitle": "Open each folded note to read a favorite memory.",
+    "choices": [
+      {
+        "id": "memory-1",
+        "type": "folded-note",
+        "label": "My Safest Little Moment",
+        "tag": "Memory 01",
+        "messageTitle": "My Safest Little Moment",
+        "messageBody": "I just can't forget those moments when we used to meet at tuition regularly, and the day when my feet were cold and I placed them on your feet; that was the best and safest moment so far. 😭💕"
+      },
+      {
+        "id": "memory-2",
+        "type": "tiny-envelope",
+        "label": "That Little Moment of Peace",
+        "tag": "Memory 02",
+        "messageTitle": "That Little Moment of Peace",
+        "messageBody": "I loved that evening when you just laid down on the desk and let me caress your hair 💖"
+      },
+      {
+        "id": "memory-3",
+        "type": "ribbon-slip",
+        "label": "A Kiss I'll Always Remember",
+        "tag": "Memory 03",
+        "messageTitle": "A Kiss I'll Always Remember",
+        "messageBody": "I remember the evening when you placed your head on my hands and gently kissed my hand... that memory holds a special place in my heart ❤️🩹"
+      },
+      {
+        "id": "memory-4",
+        "type": "postcard-slip",
+        "label": "That Cold, Breezy Evening",
+        "tag": "Memory 04",
+        "messageTitle": "That Cold, Breezy Evening",
+        "messageBody": "That cold breezy evening, when you took my hand and place it over your chest was wholesome 💌"
+      }
+    ],
+    "continueLabel": "See the Final Surprise"
+  },
+  "story": {
+    "label": "A PAGE FROM MY HEART ♡",
+    "title": "Somehow, I got you… 😭❤️",
+    "paragraphs": [
+      "Sometime I wonder how lucky am I that I've got you... I may forget everything but I remember each and every detail of yours and ussss ofc 😭❤️ I get lost in my own little world where the only person who stays are you and I....",
+      "I might have done some good deeds in my life that I've got you... I'm so grateful that atleast you love me and accepted me the way I'm 😭 you've never complained anything about me,my overthinking,my childishness etc....",
+      "Whenever I talk with you or I'm with you I forget everything justtt everything... The only thing I pray to allah is you,your succes,our family and just uss...you're my 11:11 wish,tahajjud,zuhr,asr,Maghrib,isha dua ❤️🩹",
+      "I've never took anything seriously in my life but the only person whom I took seriously is you 😭💗 I hope you like this small surprise... Ik my parents are sooo strict that I can't even meet you even on your birthday 😭 from next year I'll always be there with you on your birthdays fs 😁"
+    ],
+    "highlights": [
+      "you're my 11:11 wish",
+      "the only person whom I took seriously is you"
+    ],
+    "signature": "— Manisha ♡",
+    "continueLabel": "Hear My Voice →"
+  },
+  "voiceNote": {
+    "title": "A little message, in my own voice… ♡",
+    "subtitle": "Some things are better heard than read.",
+    "cardLabel": "A voice note from Manisha ♡",
+    "caption": "Just for you, bacha. ❤️",
+    "audioUrl": "/api/audio",
+    "durationSec": 40.49,
+    "waveform": [0.83, 0.93, 0.99, 0.79, 0.45, 1.0, 0.99, 0.79, 1.0, 0.64, 1.0, 1.0, 0.67, 1.0, 0.43, 0.75, 1.0, 0.52, 0.84, 0.54, 0.57, 0.99, 0.66, 1.0, 0.77, 1.0, 0.52, 1.0, 1.0, 0.85, 1.0, 0.33],
+    "continueLabel": "One Last Thing →"
+  },
+  "final": {
+    "eyebrow": "Always worth celebrating",
+    "title": "One last thing, my bacha…",
+    "paragraphs": [
+      "And one last thing, my bacha, if there's one thing I wish for you beyond all the birthdays and celebrations, it's that life never makes you forget how special you are. Even on days when things don't work out, when your efforts feel unnoticed or your dreams seem a little too far away, I hope you remember that you're capable of so much more than you realise.",
+      "I'll always wish for your happiness, even in the smallest things, and pray that the world gives you reasons to feel proud of yourself. I hope one day you look back at your journey and realise that every little effort was worth it.",
+      "No matter how much you grow, how successful you become or how many places life takes you, you'll always be my cutuu buddhu. 😚 May Allah write the most beautiful things for you. Here's to all the birthdays, dreams, victories and beautiful chapters yet to come."
+    ],
+    "emphasis": "I love you, Hassan. Always rooting for you. 💖",
+    "signature": "— Manisha ♡",
+    "credit": "Gifted by Manisha",
+    "replayLabel": "Replay from the Beginning"
+  },
+  "music": {
+    "title": "I Think They Call This Love",
+    "artist": "Elliot James Reay"
+  }
+}
+
