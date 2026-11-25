@@ -468,11 +468,13 @@ function renderMemoryKeepsakes() {
   for (const item of state.content.gifts.choices) {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = `memory-slip-card${state.visitedGifts.has(item.id) ? ' is-visited' : ''}`;
+    const isRead = state.visitedGifts.has(item.id);
+    btn.className = `memory-slip-card${isRead ? ' is-visited' : ''}`;
     btn.innerHTML = `
       <span class="memory-slip-art" aria-hidden="true">${createMemoryKeepsakeSVG(item.type)}</span>
       <span class="memory-slip-title">${escapeHtml(item.label)}</span>
       <span class="memory-slip-tag">${escapeHtml(item.tag)}</span>
+      <span class="memory-slip-cta">${isRead ? 'Opened ✓ (Tap to re-read)' : 'Tap to open →'}</span>
     `;
     btn.addEventListener('click', () => {
       state.visitedGifts.add(item.id);

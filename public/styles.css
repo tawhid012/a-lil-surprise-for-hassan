@@ -552,9 +552,11 @@ body {
 }
 
 .hub-object-card {
+  -webkit-appearance: none;
+  appearance: none;
   position: relative;
-  border: 1.2px dashed rgba(26, 43, 76, 0.16);
-  background: rgba(255, 253, 247, 0.55);
+  border: 1.5px solid rgba(26, 43, 76, 0.24);
+  background: var(--bg-ivory);
   padding: 18px 12px 14px;
   cursor: pointer;
   display: flex;
@@ -562,7 +564,7 @@ body {
   align-items: center;
   gap: 8px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(26, 43, 76, 0.06);
+  box-shadow: 3px 4px 0 rgba(26, 43, 76, 0.14), 0 8px 18px rgba(26, 43, 76, 0.06);
   transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
