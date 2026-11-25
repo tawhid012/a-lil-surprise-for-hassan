@@ -18,6 +18,7 @@ const prefersReducedMotion = () =>
 
 const state = {
   content: null,
+  sessionToken: '',
   currentScene: 'scene-gate',
   isTransitioning: false,
   galleryIndex: 0,
@@ -209,13 +210,22 @@ function clearGateError() {
 }
 
 async function loadProtectedContent() {
-  const res = await fetch('/api/content', { credentials: 'same-origin' });
-  if (!res.ok) throw new Error('Unable to load content');
+  const headers = state.sessionToken
+    ? { Authorization: `Bearer ${state.sessionToken}` }
+    : {};
+  const res = await fetch('/api/content', { credentials: 'same-origin', headers });
+  if (!res.ok) throw new Error(`Unable to load content (${res.status})`);
   const data = await res.json();
   if (!data.ok || !data.content) throw new Error('Invalid content payload');
   state.content = data.content;
   hydrateExperience(state.content);
   goToScene('scene-1');
+}
+
+function getProtectedUrl(basePath) {
+  if (!state.sessionToken) return basePath;
+  const sep = basePath.includes('?') ? '&' : '?';
+  return `${basePath}${sep}token=${encodeURIComponent(state.sessionToken)}`;
 }
 
 function hydrateExperience(c) {
@@ -261,7 +271,7 @@ function hydrateExperience(c) {
   renderGallery(0);
   for (const photo of c.gallery.photos) {
     const img = new Image();
-    img.src = `/api/photo?id=${encodeURIComponent(photo.id)}`;
+    img.src = getProtectedUrl(`/api/photo?id=${encodeURIComponent(photo.id)}`);
   }
 
   // Scene Story
@@ -302,7 +312,7 @@ function renderGallery(index) {
   state.galleryIndex = ((index % total) + total) % total;
   state.viewedPhotos.add(state.galleryIndex);
   const item = photos[state.galleryIndex];
-  const photoUrl = `/api/photo?id=${encodeURIComponent(item.id)}`;
+  const photoUrl = getProtectedUrl(`/api/photo?id=${encodeURIComponent(item.id)}`);
 
   el.albumFrameWrap.innerHTML = `
     <figure class="polaroid-card" style="transform: rotate(${item.rotation}deg)">
@@ -344,7 +354,7 @@ function renderGallery(index) {
 function openLightbox() {
   const item = state.content.gallery.photos[state.galleryIndex];
   state.lastFocusedBeforeLightbox = document.activeElement;
-  el.lightboxImg.src = `/api/photo?id=${encodeURIComponent(item.id)}`;
+  el.lightboxImg.src = getProtectedUrl(`/api/photo?id=${encodeURIComponent(item.id)}`);
   el.lightboxImg.alt = item.caption;
   el.lightboxCaption.textContent = item.caption;
   el.lightbox.hidden = false;
@@ -569,7 +579,7 @@ function setupVoiceNote(vn) {
     el.voiceWaveform.appendChild(bar);
   }
 
-  el.voiceAudio.src = vn.audioUrl;
+  el.voiceAudio.src = getProtectedUrl(vn.audioUrl);
   el.voiceError.hidden = true;
 }
 
@@ -691,6 +701,7 @@ function bindEvents() {
         el.passwordInput.select();
         return;
       }
+      if (data.token) state.sessionToken = data.token;
       el.passwordInput.value = '';
       await loadProtectedContent();
     } catch {

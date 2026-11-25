@@ -95,7 +95,20 @@ export function isRequestAuthorized(event) {
   const headers = event.headers || {};
   const cookieHeader = headers.cookie || headers.Cookie || '';
   const cookies = parseCookies(cookieHeader);
-  return verifySessionToken(cookies[COOKIE_NAME]);
+  if (verifySessionToken(cookies[COOKIE_NAME])) {
+    return true;
+  }
+  const authHeader = headers.authorization || headers.Authorization || '';
+  if (typeof authHeader === 'string' && authHeader.startsWith('Bearer ')) {
+    if (verifySessionToken(authHeader.slice(7).trim())) {
+      return true;
+    }
+  }
+  const queryToken = event.queryStringParameters?.token;
+  if (typeof queryToken === 'string' && verifySessionToken(queryToken)) {
+    return true;
+  }
+  return false;
 }
 
 export function isHttpsRequest(event) {
@@ -189,10 +202,14 @@ export function clearAuthFailures(clientKey) {
 export function resolvePrivatePath(...segments) {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const candidates = [
+    process.env.LAMBDA_TASK_ROOT
+      ? path.resolve(process.env.LAMBDA_TASK_ROOT, 'private-data', ...segments)
+      : null,
     path.resolve(process.cwd(), 'private-data', ...segments),
+    path.resolve(__dirname, 'private-data', ...segments),
     path.resolve(__dirname, '..', '..', '..', 'private-data', ...segments),
     path.resolve(__dirname, '..', '..', 'private-data', ...segments)
-  ];
+  ].filter(Boolean);
   for (const candidate of candidates) {
     if (fs.existsSync(candidate)) {
       return candidate;

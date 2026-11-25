@@ -74,7 +74,7 @@ export const handler = async (event) => {
 
   return jsonResponse(
     200,
-    { ok: true },
+    { ok: true, token },
     { 'Set-Cookie': cookie }
   );
 };
